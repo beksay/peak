@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/public.xhtml" id="bodyBlock">
+
+	<ui:define name="content">
+		<div class="mainJukList">
+			<div class="container">
+				<div class="mainList">
+					<div class="mainJuk">
+						<div class="mainJukLeft">
+						  <h:graphicImage library="images" name="marafon.jpeg" width="240"/>
+						</div>
+						<div class="mainJukContent">
+							<div class="mainJukInfo">
+								<label>Event one</label>
+								<p>about event about event about event about event about event about event about event about event about event</p>
+								<ul>
+								    <li><span><i class="fas fa-clock"></i> :</span> 01.01.2020 </li>
+									<li><span><i class="fas fa-copyright"></i> :</span> Company Name</li>
+								</ul>
+							</div>
+						</div>
+						<div class="mainJukButton">
+							<p:commandButton action="#{publicController.mainList()}" value="#{msgs.learnMore}"/>
+						</div>
+					</div>
+					<div class="mainJuk">
+						<div class="mainJukLeft">
+						   <h:graphicImage library="images" name="marafon.jpeg" width="240"/>
+						</div>
+						<div class="mainJukContent"> 
+							<div class="mainJukInfo">
+								<label>Event two</label>
+								<p>about event about event about event about event about event about event about event about event about event</p>
+								<ul>
+								    <li><span><i class="fas fa-clock"></i> :</span> 01.01.2020 </li>
+									<li><span><i class="fas fa-copyright"></i> :</span> Company Name</li>
+								</ul>
+							</div>
+						</div>
+						<div class="mainJukButton">
+							<p:commandButton action="#{publicController.localList()}" value="#{msgs.learnMore}"/>
+						</div>
+					</div>
+					<div class="mainJuk">
+						<div class="mainJukLeft">
+						   <h:graphicImage library="images" name="marafon.jpeg" width="240"/>
+						</div>
+						<div class="mainJukContent">
+							<div class="mainJukInfo">
+								<label>Event three</label>
+								<p>about event about event about event about event about event about event about event about event about event</p>
+								<ul>
+								    <li><span><i class="fas fa-clock"></i> :</span> 01.01.2020 </li>
+									<li><span><i class="fas fa-copyright"></i> :</span> Company Name</li>
+								</ul>
+							</div>
+						</div>
+						<div class="mainJukButton">
+							<p:commandButton action="#{publicController.intList()}" value="#{msgs.learnMore}"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

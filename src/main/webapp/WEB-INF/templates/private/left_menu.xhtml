@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<ui:composition>
+	    <div class="mainSidecontent">
+			<h:form>
+		        <div class="main-menu">
+	        		<div class="my-avatar">
+	        			<div class="the-avatar">
+	        				<i class="fas fa-cogs"></i>
+	        			</div>
+	        			<div class="the-user">#{msgs.myProfile}</div>
+	        		</div>
+	               <h:commandLink  value="#{msgs.mainData}" action="#{profileController.mainData()}"
+	                      styleClass="#{view.viewId.contains('profile') ? 'active' : ''}"/>
+	               <h:commandLink  value="#{msgs.countries}" action="#{profileController.countryList()}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'manager')}"
+	                      styleClass="#{view.viewId.contains('dictionary') ? 'active' : ''}"/> 
+	               <h:commandLink  value="#{msgs.faq}" action="#{profileController.faqList()}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'manager')}"
+	                      styleClass="#{view.viewId.contains('faq') ? 'active' : ''}"/>    
+	               <h:commandLink  value="#{msgs.myTransport}" action="#{transportController.goProfile(loginUtil.currentUser.person)}" styleClass="#{view.viewId.contains('transport') ? 'active' : ''}" 
+	                      rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver')}"/>  
+	               <h:commandLink  value="#{msgs.myDocuments}" action="#{documentController.goProfile(loginUtil.currentUser.person)}" styleClass="#{view.viewId.contains('documents') ? 'active' : ''}" 
+	                      rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver')}"/>              
+	               <h:commandLink  value="#{msgs.payments}" action="#{profileController.paymentList()}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver')}"
+	                      styleClass="#{view.viewId.contains('payments') ? 'active' : ''}"/>     
+	               <h:commandLink  value="Помощь" action="#{profileController.helpList()}"
+	                      styleClass="#{view.viewId.contains('help') ? 'active' : ''}" />
+				</div>
+ 			</h:form>						
+		</div> 
+	</ui:composition>
+</html>

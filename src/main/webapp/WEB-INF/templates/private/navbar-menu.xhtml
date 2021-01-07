@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:composition>
+	    <div class="maintopContainerPrivate">
+			<div class="container">
+			  <h:form>
+				<div class="maintopContent">
+					<div class="maintop-logo">
+						<a class="mainlogo" href="/peakcoin/view/main.xhtml"><h:graphicImage library="images" name="logojuk.png"/></a>
+						
+						<ul class="jukMenu">
+						    <h:panelGroup  layout="block" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'manager')}">
+								<li>
+								   <h:link value="#{msgs.local}"  outcome="/view/managerLocal/new_list.xhtml">
+								      <span class="badge">#{managerController.newList}</span>
+								   </h:link>
+								</li>
+								<li>
+								   <h:link value="#{msgs.international}" outcome="/view/managerInt/new_list.xhtml">
+								      <span class="badge">#{managerController.newIntList}</span>
+								   </h:link>
+								</li>
+								<li>
+								   <h:link value="#{msgs.users}" outcome="/view/persons/user_journal.xhtml">
+								   </h:link>
+								</li>
+							</h:panelGroup>
+							<li>
+							   <h:link value="#{msgs.localCargo}"  outcome="/view/local/local_list.xhtml" 
+							    rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver' and loginUtil.currentUser.person.transport !=null and loginUtil.currentUser.person.transport.status eq 'COMPLETED')}">
+							   </h:link>
+							</li>
+							<li>
+							   <h:link value="#{msgs.internationalCargo}"  outcome="/view/international/international_list.xhtml" 
+							        rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'company')}">
+							   </h:link>
+							</li>
+							<li>
+							   <h:link value="#{msgs.myShipments}"  outcome="/view/local/my_local_list.xhtml" 
+							     rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver' and loginUtil.currentUser.person.transport !=null and loginUtil.currentUser.person.transport.status eq 'COMPLETED')}">	
+							   </h:link>
+							</li>
+						</ul>
+					</div>
+					<div class="maintop-right">
+					    <h:outputText value="#{paymentController.allAmount()} сом" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver')}" style="color:#edc55f; font-weight: 700; margin-right: 3px;"/>
+						<h:commandLink action="#{profileController.goProfile(loginUtil.currentUser)}" value="Привет, #{loginUtil.currentUser.person.firstName}" />
+					</div>
+				  </div>
+			   </h:form>
+			</div>
+		</div>
+	</ui:composition>
+</html>
