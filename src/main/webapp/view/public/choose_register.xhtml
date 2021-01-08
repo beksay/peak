@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/public.xhtml" id="bodyBlock">
+
+    <ui:define name="content">
+		
+		<div class="full-height p-padding login-page">					
+			    
+			<div class="logo-block">
+				<h1 class="title">#{msgs.registration}</h1>
+			</div>
+			
+			<h:panelGroup id="messages">
+				<p:growl  />
+			</h:panelGroup>
+			    
+			<h:form id="login-form-register"  >
+			    <h:panelGroup  layout="block" class="row" >
+						<div class="col-md-6">
+						   <div class="card text-center">
+							  <div class="card-header">
+							    #{msgs.forUser}
+							  </div>
+							  <h:commandLink action="#{registrationAction.registerUser()}">
+								  <div class="card-body">
+								    <h:graphicImage library="images" height="100" width="100"  name="tourist.png"/>
+								    <h5 class="card-title">#{msgs.ifYouAreUser}</h5>
+								  </div>
+							  </h:commandLink>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="card text-center">
+							  <div class="card-header">
+							    #{msgs.forCompany}
+							  </div>
+							  <h:commandLink action="#{registrationAction.registerCompany()}">
+								  <div class="card-body">
+								    <h:graphicImage library="images" height="100" width="100"  name="company.png"/>
+								    <h5 class="card-title">#{msgs.ifYouAreCompany}</h5>
+								  </div>
+							  </h:commandLink>
+							</div>
+						</div>
+					</h:panelGroup>
+			</h:form>
+		</div>
+				
+	</ui:define>	
+	
+</ui:composition>
