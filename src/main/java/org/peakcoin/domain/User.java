@@ -35,7 +35,7 @@ public class User extends AbstractEntity<Integer>  {
 	private Date datePasswordExpired;
 	private Role role;
 	private Person person;
-	
+    private Company company;	
 
 	@ManyToOne
     @JoinColumn(name="person_id")
@@ -45,6 +45,16 @@ public class User extends AbstractEntity<Integer>  {
     public void setPerson(Person person) {
         this.person = person;
     }
+    
+    @ManyToOne
+    @JoinColumn(name="company_id")
+    public Company getCompany() {
+		return company;
+	}
+    
+    public void setCompany(Company company) {
+		this.company = company;
+	}
 
 	public String getPassword() {
 		return this.password;

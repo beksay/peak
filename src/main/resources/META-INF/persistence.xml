@@ -20,6 +20,7 @@
       <class>org.peakcoin.domain.Faq</class>
       <class>org.peakcoin.domain.Complaints</class>
       <class>org.peakcoin.domain.Documents</class>
+      <class>org.peakcoin.domain.Company</class>
       <!-- entities -->
       
       <exclude-unlisted-classes>true</exclude-unlisted-classes>

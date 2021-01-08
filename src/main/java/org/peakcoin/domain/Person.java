@@ -24,13 +24,14 @@ public class Person extends AbstractEntity<Integer>{
     private String lastName;
     private String firstName;
     private String middleName; 
-    private Date birthdate;
+    private String nickname;
     private Gender gender;   
     private String phone;
     private String account;
     private BigDecimal money;
     private Boolean requirement;
     private Date birthDate;
+    private Date dateCreated;
     private Documents documents;
 
     @Column(name = "last_name")
@@ -56,16 +57,6 @@ public class Person extends AbstractEntity<Integer>{
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
-    
-    @Temporal(TemporalType.DATE)
-	@Column(name="birthdate")
-    public Date getBirthdate() {
-		return birthdate;
-	}
-    
-    public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
-	}
    
     @Enumerated(EnumType.ORDINAL)
     public Gender getGender() {
@@ -128,8 +119,27 @@ public class Person extends AbstractEntity<Integer>{
 	public Documents getDocuments() {
 		return documents;
 	}
+	
 	public void setDocuments(Documents documents) {
 		this.documents = documents;
+	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+	
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="date_created")
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+	
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 	
 }

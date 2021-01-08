@@ -8059,6 +8059,12 @@ div.user:hover .user-menu {
     
 }
 
+#login-form-register {
+    width: 500px;
+    margin: 40px auto 0;
+    
+}
+
 #login-form .label {
     font-weight: bold;
     margin-left: 2px;
