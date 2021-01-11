@@ -10,45 +10,33 @@
 			  <h:form>
 				<div class="maintopContent">
 					<div class="maintop-logo">
-						<a class="mainlogo" href="/peakcoin/view/main.xhtml"><h:graphicImage library="images" name="logojuk.png"/></a>
+						<a class="mainlogo" href="/peakcoin/view/main.xhtml"><h:graphicImage library="images" name="logo.png" width="100"/></a>
 						
 						<ul class="jukMenu">
-						    <h:panelGroup  layout="block" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'manager')}">
-								<li>
-								   <h:link value="#{msgs.local}"  outcome="/view/managerLocal/new_list.xhtml">
-								      <span class="badge">#{managerController.newList}</span>
-								   </h:link>
-								</li>
-								<li>
-								   <h:link value="#{msgs.international}" outcome="/view/managerInt/new_list.xhtml">
-								      <span class="badge">#{managerController.newIntList}</span>
-								   </h:link>
-								</li>
-								<li>
-								   <h:link value="#{msgs.users}" outcome="/view/persons/user_journal.xhtml">
-								   </h:link>
-								</li>
-							</h:panelGroup>
 							<li>
-							   <h:link value="#{msgs.localCargo}"  outcome="/view/local/local_list.xhtml" 
-							    rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver' and loginUtil.currentUser.person.transport !=null and loginUtil.currentUser.person.transport.status eq 'COMPLETED')}">
+							   <h:link value="#{msgs.hiking}"  outcome="/view/hiking/hiking_list.xhtml" styleClass="#{view.viewId.contains('/hiking/') ? 'active' : ''}"
+							     rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'tourist') or loginUtil.userHasRole(loginUtil.currentUser, 'company')}">
 							   </h:link>
 							</li>
 							<li>
-							   <h:link value="#{msgs.internationalCargo}"  outcome="/view/international/international_list.xhtml" 
-							        rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'company')}">
+							   <h:link value="#{msgs.tours}"   
+							     rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'tourist') or loginUtil.userHasRole(loginUtil.currentUser, 'company')}">
 							   </h:link>
 							</li>
 							<li>
-							   <h:link value="#{msgs.myShipments}"  outcome="/view/local/my_local_list.xhtml" 
-							     rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver' and loginUtil.currentUser.person.transport !=null and loginUtil.currentUser.person.transport.status eq 'COMPLETED')}">	
+							   <h:link value="#{msgs.events}"   
+							     rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'tourist') or loginUtil.userHasRole(loginUtil.currentUser, 'company')}">
 							   </h:link>
 							</li>
 						</ul>
 					</div>
 					<div class="maintop-right">
-					    <h:outputText value="#{paymentController.allAmount()} сом" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver')}" style="color:#edc55f; font-weight: 700; margin-right: 3px;"/>
-						<h:commandLink action="#{profileController.goProfile(loginUtil.currentUser)}" value="Привет, #{loginUtil.currentUser.person.firstName}" />
+						<h:commandLink action="#{profileController.goProfile(loginUtil.currentUser)}" value="Привет, #{loginUtil.currentUser.person.firstName}" 
+						    rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'manager')}"/>
+						<h:commandLink action="#{profileController.goProfile(loginUtil.currentUser)}" value="Привет, #{loginUtil.currentUser.person.firstName}" 
+						    rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'tourist')}" />
+						<h:commandLink action="#{profileController.goProfile(loginUtil.currentUser)}" value="Привет, #{loginUtil.currentUser.company.name}" 
+						    rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'company')}"/>
 					</div>
 				  </div>
 			   </h:form>

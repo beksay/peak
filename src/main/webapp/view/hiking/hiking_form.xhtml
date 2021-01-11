@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layouts/private.xhtml">
+	<ui:define name="content">
+		<div class="container">
+				<div class="jukForm">
+					<h:form>
+						<div class="row">
+							<div class="col-12">
+							   <h3>#{msgs.hikingForm}</h3>
+							</div>
+							<div class="col-12">
+								<h:outputLabel value="#{msgs.name}" />
+								<h:inputText id="hikingName"
+									value="#{hikingController.hiking.name}" required="true"
+									requiredMessage="#{msgs.hikingName} - #{msgs.isReq}">
+								</h:inputText>
+								<h:message for="hikingName" display="icon" style="color:red;" />
+							</div>
+							<div class="col-12">
+								<h:outputLabel value="#{msgs.description}" />
+								<p:inputTextarea id="description" value="#{hikingController.hiking.description}" 
+									required="true" rows="3" cols="40"
+									requiredMessage="#{msgs.description} - #{msgs.isReq}" >
+								</p:inputTextarea>
+								<h:message for="description" display="icon" style="color:red;" />
+							</div>
+							<div class="col-6">
+								<h:outputLabel value="#{msgs.amount}" />
+								<h:inputText id="amount"
+									value="#{hikingController.hiking.amount}" required="true"
+									requiredMessage="#{msgs.amount} - #{msgs.isReq}">
+								</h:inputText>
+								<h:message for="amount" display="icon" style="color:red;" />
+							</div>
+							<div class="col-6">
+								<h:outputLabel value="#{msgs.date}" for="date"/>
+				                <p:calendar value="#{hikingController.hiking.date}" id="date"
+			                            required="true" showOn="button"
+			                            requiredMessage="#{msgs.date} - #{msgs.isReq}"
+			                            pattern="dd-MM-yyyy" /> 
+				                <h:message for="date" display="icon" style="color:red;" />
+							</div>
+							<div class="col-6">
+								<h:outputLabel value="#{msgs.quantity}" />
+								<h:inputText id="quantity"
+									value="#{hikingController.hiking.quantity}" required="true"
+									requiredMessage="#{msgs.quantity} - #{msgs.isReq}">
+								</h:inputText>
+								<h:message for="quantity" display="icon" style="color:red;" />
+							</div>
+							<div class="col-12">
+								<h:outputLabel value="#{msgs.hikingProgram}" />
+								<p:textEditor widgetVar="editor1" value="#{hikingController.hiking.program}" height="200" />
+						        <h:outputLabel  />
+							</div>
+							<div class="col-6" >
+							   <p:commandButton class="button" value="#{msgs.save}"
+								     action="#{hikingController.save()}" icon="fas fa-save"/>
+								<h:outputLabel style="width:50px;display:inline-block"/>				
+								<p:commandButton class="button" value="#{msgs.cancel}" icon="fas fa-window-close"
+								    action="#{hikingController.cancel()}" immediate="true" />
+							</div>
+						</div>
+						<p:messages/>
+					 </h:form>
+				</div>
+		 </div>	
+	</ui:define>
+</ui:composition>

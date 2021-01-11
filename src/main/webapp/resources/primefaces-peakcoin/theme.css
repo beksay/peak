@@ -10499,3 +10499,65 @@ body .mainDataDate p svg {
 .divider-custom.divider-light .divider-custom-icon {
   color: #fff !important;
 }
+
+body .contentBlock .ui-g .ui-datagrid-column {
+	padding:15px;
+}
+body .contentBlock .contentBlockInner {
+	background:#fff;
+	border-radius: 5px;
+	padding:10px;
+	display: flex;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+	flex-direction: column-reverse;
+}
+body .contentBlock .contentBlockInner .ui-panel-content{
+	border:0;
+	padding:0;
+}
+body .contentBlock .contentBlockInner .ui-panel-titlebar {
+	border-radius: 5px;
+	display: flex;
+	background: #d9eff5;
+    justify-content: center;
+}
+body .contentBlock .contentBlockInner .ui-panel-content table {
+	width:100%;
+}
+body .contentBlock .contentBlockInner .InnerBlock{
+	
+} 
+body .contentBlock .contentBlockInner .innerDetail {
+	display: flex;
+	flex-direction: row;
+	padding:5px 1px 10px;
+}
+body .contentBlock .contentBlockInner .innerDetail .blockDate {
+	font-size:12px;
+}
+body .contentBlock .contentBlockInner .innerDetail .blockDate svg {
+	margin-right:5px;
+	font-size:14px;
+}
+body .contentBlock .contentBlockInner .innerDetail a {
+	flex:1;
+	font-weight:500;
+}
+body .contentBlock .contentBlockInner .InnerBlock .innerDetailIMG {
+	display:block;
+}
+
+body .addBtn {
+    background-color: #C68E46;
+    color: #ffffff;
+    border: 1px solid #C68E46;
+    font-size: 13px;
+    margin: 0;
+    outline: 0 none;
+    -moz-transition: background-color 0.2s, box-shadow 0.2s;
+    -o-transition: background-color 0.2s, box-shadow 0.2s;
+    -webkit-transition: background-color 0.2s, box-shadow 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}

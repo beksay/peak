@@ -13,7 +13,6 @@ import org.peakcoin.annotation.Logged;
 import org.peakcoin.conversations.Conversational;
 import org.peakcoin.domain.Person;
 import org.peakcoin.domain.User;
-import org.peakcoin.enums.TransportStatus;
 import org.peakcoin.service.PersonService;
 import org.peakcoin.service.UserService;
 import org.peakcoin.util.web.Messages;

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layouts/private.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<div class="container">
+				<div class="mainListData">
+					<div class="mainListFilter">
+						<h:panelGroup styleClass="row filter" layout="block"
+							id="filterPanel">
+							<h:panelGroup layout="block" class="col">
+						
+							</h:panelGroup>
+							<div class="col-auto">
+								<label></label>
+								<p:commandButton ajax="false" id="applyBtn"
+								   value="#{msgs.search}" icon="fas fa-search" />
+							</div>
+							<div class="col-auto">
+								<label></label>
+								<p:commandButton ajax="false" id="clearBtn"
+									value="#{msgs.clear}" icon="fas fa-eraser" />
+							</div>
+							<div class="col-auto">
+							    <label></label>
+						    	<p:commandButton value="#{msgs.add}" action="#{hikingController.add()}" styleClass="addBtn"/>
+							</div>
+						</h:panelGroup>
+					</div>
+					<div class="mainListContent">
+						<div class="mainJukInfo">
+						   <p:dataGrid var="entity" value="#{hikingList.model}" paginator="true" rows="12" rowIndexVar="index" 
+						        lazy="true" emptyMessage="#{msgs.noRecordsFound}"  
+								columns="4" layout="grid" sortOrder="DESCENDING" styleClass="contentBlock" 
+								rowsPerPageTemplate="12,24,36,48,64" paginatorPosition="bottom" pageLinks="10"
+								currentPageReportTemplate="#{msgs.showPaymentNumbers}" selectionMode="single"
+								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} {RowsPerPageDropdown}"
+								selection="#{hikingList.hiking}"
+					            first="#{hikingList.first}" >
+					            <p:ajax event="page" listener="#{hikingList.onPageChange}"/>  
+								<p:panel header="#{entity.amount} сом" styleClass="contentBlockInner">
+						            <div class="InnerBlock">
+						                <h:commandLink action="#{hikingController.preview(entity)}" styleClass="innerDetailIMG">
+							                <h:graphicImage value="#{utilController.getDownloadURL(utilController.generateKeyAliveCurrentSession(entity.picture))}"
+						    		            rendered="#{entity.picture.id ne null}" width="100" height="150"/>
+						    		        <h:graphicImage library="images" name="marafon.jpeg" rendered="#{entity.picture.id eq null}" width="210" />
+						                </h:commandLink>
+						                <div class="innerDetail">
+							                <p class="blockDate">
+							                	<i class="far fa-calendar-alt"></i>
+							                	<h:outputText value="#{entity.date}">
+													<f:convertDateTime pattern="dd-MM-yyyy" />
+												</h:outputText>
+							                </p>
+							                <h:outputText value="4/20" style="margin-left: auto;"/>
+						                </div>
+						               <h:commandLink action="#{hikingController.preview(entity)}" value="#{entity.name}"/>
+						            </div>
+				                </p:panel>
+					        </p:dataGrid>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

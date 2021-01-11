@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layouts/private.xhtml">
+	<ui:define name="content">
+	  <div class="container">
+			<div class="jukForm">
+				<h:form>
+					<div class="card bg-light mb-3">
+						<div class="card-header">#{msgs.hikingInfo}</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-6">
+									<h5 class="card-title">#{msgs.name} :</h5>
+									<p class="card-text">#{hikingController.hiking.name}</p>
+									<h5 class="card-title">#{msgs.description} :</h5>
+									<p class="card-text">#{hikingController.hiking.description}</p>
+									<h5 class="card-title">#{msgs.date} :</h5>
+									<p class="card-text">
+										<h:outputText value="#{hikingController.hiking.date}">
+											<f:convertDateTime pattern="dd.MM.yyyy" />
+										</h:outputText>
+									</p>
+									<h5 class="card-title">#{msgs.dateCreated} :</h5>
+									<p class="card-text">
+										<h:outputText value="#{hikingController.hiking.dateCreated}">
+											<f:convertDateTime pattern="dd.MM.yyyy" />
+										</h:outputText>
+									</p>
+									<h5 class="card-title">#{msgs.amount} :</h5>
+									<p class="card-text">
+										<h:outputText value="#{hikingController.hiking.amount} сом">
+											<f:converter converterId="decimalNumberConverter" />
+										</h:outputText>
+									</p>
+									<h5 class="card-title">#{msgs.hikingProgram} :</h5>
+									<h:outputText value="#{hikingController.hiking.program}" escape="false" />
+								</div>
+								<h:panelGroup layout="block" class="col-md-6">
+								    <h5 class="card-title">#{msgs.participants} : #{hikingController.getParticipantAmount(hikingController.hiking)} / #{hikingController.hiking.quantity}</h5>
+								    <p:dataTable var="car" value="#{hikingController.getHikingPersonList(hikingController.hiking)}"
+								        emptyMessage="#{msgs.noRecordsFound}" rowIndexVar="index" id="tableId">
+									    <p:column headerText="№" width="50">
+									        <h:outputText value="#{index + 1}" />
+									    </p:column>
+									    <p:column headerText="#{msgs.name}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'company')}">
+									        <h:outputText value="#{car.person.fullName}"/>
+									    </p:column>
+									    <p:column headerText="#{msgs.nikname}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'tourist')}">
+									        <h:outputText value="#{car.person.nickname}"/>
+									    </p:column>
+									    <p:column headerText="#{msgs.phones}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'company')}" >
+									        <h:outputText value="#{car.person.phone}"/>
+									    </p:column>
+									    <p:column>
+									        <p:commandButton action="#{hikingController.delete(car)}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'company')}"
+									          update="@form tableId" icon="fas fa-user-slash" title="Удалить" />
+									    </p:column>
+									</p:dataTable>
+									<br/>
+									<h:panelGrid columns="5" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'tourist')}">
+									    <p:commandButton ajax="false" id="applyBtn" action="#{hikingController.joinHiking(hikingController.hiking)}"
+								            rendered="#{!hikingController.isJoined(hikingController.hiking)}" value="#{msgs.participate}" icon="fas fa-plus" />
+									</h:panelGrid>
+								</h:panelGroup>
+							</div>
+						</div>
+					</div>
+					<h:panelGroup id="messages">
+						<p:growl globalOnly="true" />
+					</h:panelGroup>
+				</h:form>
+			</div>
+		</div>			
+	</ui:define>
+</ui:composition>
