@@ -61,6 +61,8 @@ public class HikingController {
 	private Company company;
 	private HikingPerson hikingPerson;
 	private Feedback feedback;
+	private FeedbackDetail feedbackDetail;
+	private Boolean replyButton;
     
 	@PostConstruct
 	public void init() {
@@ -71,6 +73,9 @@ public class HikingController {
 		if (hikingPerson==null)	hikingPerson= new HikingPerson();
 		feedback=conversation.getFeedback();
 		if (feedback==null)	feedback= new Feedback();
+		feedbackDetail=conversation.getFeedbackDetail();
+		if (feedbackDetail==null) feedbackDetail= new FeedbackDetail();
+		replyButton = false;
 	}
 
 	public String add() {
@@ -165,6 +170,12 @@ public class HikingController {
 		return hikingPersonService.countByExample(examples);
 	}
 	
+	public Long getFeedbackDetailAmount(Feedback feedback) {
+		List<FilterExample> examples = new ArrayList<>();
+		examples.add(new FilterExample("feedback", feedback, InequalityConstants.EQUAL));
+		return feedbackDetailService.countByExample(examples);
+	}
+	
 	public Boolean isJoined(Hiking hiking) {
 		List<FilterExample> filters = new ArrayList<>();
 		filters.add(new FilterExample("person", loginUtil.getCurrentUser().getPerson(), InequalityConstants.EQUAL));
@@ -177,6 +188,12 @@ public class HikingController {
 		}
 	}
 	
+	public String change(Feedback feedback) {
+		conversation.setFeedback(feedback);
+		replyButton = true;
+		return null;
+	}
+	
 	public void sendFeedback() {
 		if(feedback==null){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Select the feedback!","Select the feedback!"));
@@ -187,6 +204,18 @@ public class HikingController {
 		feedback.setDate(new Date());
 		feedbackService.persist(feedback);
 		feedback = new Feedback();
+	}
+	
+	public void sendFeedbackDetail() {
+		if(feedbackDetail==null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Select the feedback!","Select the feedback!"));
+			return;
+		}
+		feedbackDetail.setFeedback(feedback);
+		feedbackDetail.setUser(loginUtil.getCurrentUser());
+		feedbackDetail.setDate(new Date());
+		feedbackDetailService.persist(feedbackDetail);
+		feedbackDetail = new FeedbackDetail();
 	}
 	
 	public List<Feedback> getFeedbackList(Hiking hiking) {
@@ -256,5 +285,21 @@ public class HikingController {
 	
 	public void setFeedback(Feedback feedback) {
 		this.feedback = feedback;
+	}
+
+	public Boolean getReplyButton() {
+		return replyButton;
+	}
+
+	public void setReplyButton(Boolean replyButton) {
+		this.replyButton = replyButton;
+	}
+
+	public FeedbackDetail getFeedbackDetail() {
+		return feedbackDetail;
+	}
+
+	public void setFeedbackDetail(FeedbackDetail feedbackDetail) {
+		this.feedbackDetail = feedbackDetail;
 	}
 }

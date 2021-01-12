@@ -6,6 +6,7 @@ import javax.inject.Named;
 import org.peakcoin.annotation.Logged;
 import org.peakcoin.domain.Company;
 import org.peakcoin.domain.Feedback;
+import org.peakcoin.domain.FeedbackDetail;
 import org.peakcoin.domain.Hiking;
 import org.peakcoin.domain.HikingPerson;
 import org.peakcoin.domain.Person;
@@ -27,6 +28,8 @@ public class ConversationHiking extends Conversational {
 	private Company company;
 	private Person person;
 	private Feedback feedback;
+	private FeedbackDetail feedbackDetail;
+	private Boolean replyButton;
 
 	public Hiking getHiking() {
 		return hiking;
@@ -68,5 +71,26 @@ public class ConversationHiking extends Conversational {
 		this.feedback = feedback;
 	}
 
+	public FeedbackDetail getFeedbackDetail() {
+		return feedbackDetail;
+	}
+
+	public void setFeedbackDetail(FeedbackDetail feedbackDetail) {
+		this.feedbackDetail = feedbackDetail;
+	}
+
+	public Boolean getReplyButton() {
+		return replyButton;
+	}
+
+	public void setReplyButton(Boolean replyButton) {
+		this.replyButton = replyButton;
+	}
+
+	public String change(Feedback feedback) {
+		this.feedback = feedback;
+		replyButton = true;
+		return null;
+	}
 	
 }
