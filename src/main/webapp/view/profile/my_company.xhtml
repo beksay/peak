@@ -14,11 +14,11 @@
 				<h:form>
 					<div class="row">
 					    <div class="col-12" style="text-align: center;">
-							<H4>#{msgs.myProfile}</H4>
+							<H4>#{msgs.myCompany}</H4>
 						</div>
 						<div class="col-12">
 							<h:outputLabel value="#{msgs.myAccount}" />
-		    		        <h:inputText value="#{profileController.person.account}" disabled="true"/>
+		    		        <h:inputText value="#{profileController.company.account}" disabled="true"/>
 						</div>
 						<div class="col-12">
 							<h:outputLabel value="#{msgs.email}" />
@@ -29,25 +29,16 @@
     		        	    <h:inputText value="#{enums[profileController.user.status]}" disabled="true"/>
 						</div>
 						<div class="col-12">
-							<h:outputLabel value="#{msgs.firstname}" />
-	    		        	<h:inputText value="#{profileController.person.firstName}" disabled="#{profileController.editProfile==false}"/>
-						</div>
-						<div class="col-12">
-							<h:outputLabel value="#{msgs.lastname}" />
-	    		        	<h:inputText value="#{profileController.person.lastName}" disabled="#{profileController.editProfile==false}"/>
-						</div>
-						<div class="col-12">
-							 <h:outputLabel value="#{msgs.birthDate}" for="birthDate"/>
-			                 <p:calendar id="birthDate" value="#{profileController.person.birthDate}" disabled="#{profileController.editProfile==false}"
-			                 yearRange="1950:2030" navigator="true" pattern="yyyy-MM-dd" />
-						</div>
-						<div class="col-12">
+							<h:outputLabel value="#{msgs.name}" />
+	    		        	<h:inputText value="#{profileController.company.name}" disabled="true"/>
 						</div>
 						<div class="col-12">
 							<h:outputLabel value="#{msgs.myPhone}" />
-	    		        	<h:inputText value="#{profileController.person.phone}" disabled="#{profileController.editProfile==false}"/>
+	    		        	<h:inputText value="#{profileController.company.phone}" disabled="#{profileController.editProfile==false}"/>
 						</div>
 						<div class="col-12">
+							<h:outputLabel value="#{msgs.phoneAdditional}" />
+	    		        	<h:inputText value="#{profileController.company.phoneAdditional}" disabled="#{profileController.editProfile==false}"/>
 						</div>
 						<div class="col-12 mt-3">
 							<p:commandButton ajax="false" icon="fas fa-edit" action="#{profileController.change()}" value="#{msgs.editProfile}" rendered="#{profileController.editProfile ==false}"/>	

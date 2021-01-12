@@ -35,7 +35,7 @@
 						    rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'manager')}"/>
 						<h:commandLink action="#{profileController.goProfile(loginUtil.currentUser)}" value="Привет, #{loginUtil.currentUser.person.firstName}" 
 						    rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'tourist')}" />
-						<h:commandLink action="#{profileController.goProfile(loginUtil.currentUser)}" value="Привет, #{loginUtil.currentUser.company.name}" 
+						<h:commandLink action="#{profileController.goCompany(loginUtil.currentUser)}" value="Привет, #{loginUtil.currentUser.company.name}" 
 						    rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'company')}"/>
 					</div>
 				  </div>

@@ -20,7 +20,7 @@ public class MailSender {
 	
 	private static String e_mail = "peakcoin@yandex.ru";
 	private static String name = "PeakCoin";
-	private static String password = "chelsea18";
+	private static String password = "Bekturbek123#";
 	private static String host = "smtp.yandex.ru";
 	private static String port = "465";
 	
@@ -54,6 +54,8 @@ public class MailSender {
 		props.put("mail.smtp.socketFactory.port", port);
 		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.socketFactory.fallback", "false");
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.quitwait", "false");
 
 		Session mailSession = Session.getDefaultInstance(props, null);
 		MimeMessage message = new MimeMessage(mailSession);

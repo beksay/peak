@@ -62,10 +62,45 @@
 									</p:dataTable>
 									<br/>
 									<h:panelGrid columns="5" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'tourist')}">
-									    <p:commandButton ajax="false" id="applyBtn" action="#{hikingController.joinHiking(hikingController.hiking)}"
+									    <p:commandButton ajax="false" id="applyBtn" action="#{hikingController.joinHiking(hikingController.hiking)}" immediate="true"
 								            rendered="#{!hikingController.isJoined(hikingController.hiking)}" value="#{msgs.participate}" icon="fas fa-plus" />
 									</h:panelGrid>
 								</h:panelGroup>
+								<div class="col-md-12">
+								   <h:panelGroup styleClass="row filter" layout="block">
+			                         <div class="col mt-3">
+			                            <h:outputText value="#{msgs.comments}"/>
+				                        <p:inputTextarea cols="50" rows="3" id="feedback" value="#{hikingController.feedback.title}"
+										    maxlength="2000" required="true" requiredMessage="#{msgs.comments} - #{msgs.isReq}">
+										</p:inputTextarea> 
+									    <p:watermark value="#{msgs.feedbackWater}" for="feedback"/>
+			                        
+			                            <p:commandButton ajax="false"  update="feedbackId" value="#{msgs.send}" styleClass="feedbackButton"
+			                                 actionListener="#{hikingController.sendFeedback()}" />
+			                         </div>   
+			                       </h:panelGroup>
+			                       
+			                       <p:dataGrid var="car" value="#{hikingController.getFeedbackList(hikingController.hiking)}" columns="1" layout="grid" paginator="false" >
+								        <p:panel header="#{car.user.person.nickname}" >
+								            <h:panelGrid columns="1" style="width:100%">
+								                <h:outputText value="#{car.date}" style="color:green; margin-right:10px" >
+												   <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+												</h:outputText> 
+												<h:outputText value="#{car.title}" />
+								            </h:panelGrid>
+								            <ui:repeat var="backs" value="#{hikingController.getFeedbackDetailList(item)}">
+									            <p:panel header="#{backs.user.person.nickname}" >
+									               <h:panelGrid columns="1" style="width:100%">
+										                <h:outputText value="#{backs.date}" style="color:green; margin-right:10px" >
+														   <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+														</h:outputText> 
+														<h:outputText value="#{backs.title}" />
+										            </h:panelGrid>
+										        </p:panel>
+									        </ui:repeat>
+								        </p:panel>
+								    </p:dataGrid>
+								</div>
 							</div>
 						</div>
 					</div>

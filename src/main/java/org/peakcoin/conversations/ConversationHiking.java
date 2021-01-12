@@ -5,6 +5,7 @@ import javax.inject.Named;
 
 import org.peakcoin.annotation.Logged;
 import org.peakcoin.domain.Company;
+import org.peakcoin.domain.Feedback;
 import org.peakcoin.domain.Hiking;
 import org.peakcoin.domain.HikingPerson;
 import org.peakcoin.domain.Person;
@@ -25,6 +26,7 @@ public class ConversationHiking extends Conversational {
 	private HikingPerson hikingPerson;
 	private Company company;
 	private Person person;
+	private Feedback feedback;
 
 	public Hiking getHiking() {
 		return hiking;
@@ -56,6 +58,14 @@ public class ConversationHiking extends Conversational {
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
 	}
 
 	

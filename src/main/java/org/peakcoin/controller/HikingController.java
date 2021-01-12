@@ -17,10 +17,14 @@ import org.peakcoin.beans.FilterExample;
 import org.peakcoin.beans.InequalityConstants;
 import org.peakcoin.conversations.ConversationHiking;
 import org.peakcoin.domain.Company;
+import org.peakcoin.domain.Feedback;
+import org.peakcoin.domain.FeedbackDetail;
 import org.peakcoin.domain.Hiking;
 import org.peakcoin.domain.HikingPerson;
 import org.peakcoin.enums.SortEnum;
 import org.peakcoin.service.CompanyService;
+import org.peakcoin.service.FeedbackDetailService;
+import org.peakcoin.service.FeedbackService;
 import org.peakcoin.service.HikingPersonService;
 import org.peakcoin.service.HikingService;
 import org.peakcoin.service.PersonService;
@@ -44,6 +48,10 @@ public class HikingController {
 	private CompanyService companyService;
 	@EJB
 	private UserService userService;
+	@EJB
+	private FeedbackService feedbackService;
+	@EJB
+	private FeedbackDetailService feedbackDetailService;
 	@Inject
 	private LoginUtil loginUtil;
 	@Inject
@@ -52,6 +60,7 @@ public class HikingController {
 	private Hiking hiking; 
 	private Company company;
 	private HikingPerson hikingPerson;
+	private Feedback feedback;
     
 	@PostConstruct
 	public void init() {
@@ -60,6 +69,8 @@ public class HikingController {
 		company=conversation.getCompany();
 		hikingPerson=conversation.getHikingPerson();
 		if (hikingPerson==null)	hikingPerson= new HikingPerson();
+		feedback=conversation.getFeedback();
+		if (feedback==null)	feedback= new Feedback();
 	}
 
 	public String add() {
@@ -166,6 +177,41 @@ public class HikingController {
 		}
 	}
 	
+	public void sendFeedback() {
+		if(feedback==null){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Select the feedback!","Select the feedback!"));
+			return;
+		}
+		feedback.setHiking(hiking);;
+		feedback.setUser(loginUtil.getCurrentUser());
+		feedback.setDate(new Date());
+		feedbackService.persist(feedback);
+		feedback = new Feedback();
+	}
+	
+	public List<Feedback> getFeedbackList(Hiking hiking) {
+		List<FilterExample> examples = new ArrayList<>();
+		examples.add(new FilterExample("hiking", hiking, InequalityConstants.EQUAL));	
+		return feedbackService.findByExample(0, 100, SortEnum.DESCENDING, examples, "date");
+	}
+	
+	public List<FeedbackDetail> getFeedbackDetailList(Feedback feedback) {
+		List<FilterExample> examples = new ArrayList<>();
+		examples.add(new FilterExample("feedback", feedback, InequalityConstants.EQUAL));		
+		return feedbackDetailService.findByExample(0, 100, SortEnum.DESCENDING, examples, "date");
+	}
+	
+	public Boolean checkDetail(Feedback feedback) {
+    	List<FilterExample> examples = new ArrayList<>();
+		examples.add(new FilterExample("feedback", feedback, InequalityConstants.EQUAL));	
+		List<FeedbackDetail> details = feedbackDetailService.findByExample(0, 10, examples);
+     	if (details.size()>0) {
+			return true;
+		} else {
+            return false;
+		}
+    }
+	
 	public ConversationHiking getConversation() {
 		return conversation;
 	}
@@ -202,5 +248,13 @@ public class HikingController {
 		List<FilterExample> examples = new ArrayList<>();
 		examples.add(new FilterExample("hiking", hiking, InequalityConstants.EQUAL));
 		return hikingPersonService.countByExample(examples);
+	}
+	
+	public Feedback getFeedback() {
+		return feedback;
+	}
+	
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
 	}
 }

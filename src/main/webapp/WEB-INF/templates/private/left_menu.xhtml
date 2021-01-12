@@ -15,18 +15,14 @@
 	        			</div>
 	        			<div class="the-user">#{msgs.myProfile}</div>
 	        		</div>
-	               <h:commandLink  value="#{msgs.mainData}" action="#{profileController.mainData()}"
+	               <h:commandLink  value="#{msgs.mainData}" action="#{profileController.mainData()}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'tourist')}"
 	                      styleClass="#{view.viewId.contains('profile') ? 'active' : ''}"/>
-	               <h:commandLink  value="#{msgs.countries}" action="#{profileController.countryList()}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'manager')}"
-	                      styleClass="#{view.viewId.contains('dictionary') ? 'active' : ''}"/> 
+	               <h:commandLink  value="#{msgs.myCompany}" action="#{profileController.mainDataCompany()}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'company')}"
+	                      styleClass="#{view.viewId.contains('profile') ? 'active' : ''}"/>       
 	               <h:commandLink  value="#{msgs.faq}" action="#{profileController.faqList()}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'manager')}"
 	                      styleClass="#{view.viewId.contains('faq') ? 'active' : ''}"/>    
-	               <h:commandLink  value="#{msgs.myTransport}" action="#{transportController.goProfile(loginUtil.currentUser.person)}" styleClass="#{view.viewId.contains('transport') ? 'active' : ''}" 
-	                      rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver')}"/>  
 	               <h:commandLink  value="#{msgs.myDocuments}" action="#{documentController.goProfile(loginUtil.currentUser.person)}" styleClass="#{view.viewId.contains('documents') ? 'active' : ''}" 
 	                      rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver')}"/>              
-	               <h:commandLink  value="#{msgs.payments}" action="#{profileController.paymentList()}" rendered="#{loginUtil.userHasRole(loginUtil.currentUser, 'driver')}"
-	                      styleClass="#{view.viewId.contains('payments') ? 'active' : ''}"/>     
 	               <h:commandLink  value="Помощь" action="#{profileController.helpList()}"
 	                      styleClass="#{view.viewId.contains('help') ? 'active' : ''}" />
 				</div>

@@ -56,7 +56,7 @@
 													<f:convertDateTime pattern="dd-MM-yyyy" />
 												</h:outputText>
 							                </p>
-							                <h:outputText value="4/20" style="margin-left: auto;"/>
+							                <h:outputText value="#{hikingController.getParticipantAmount(entity)} / #{entity.quantity}" style="margin-left: auto;"/>
 						                </div>
 						               <h:commandLink action="#{hikingController.preview(entity)}" value="#{entity.name}"/>
 						            </div>

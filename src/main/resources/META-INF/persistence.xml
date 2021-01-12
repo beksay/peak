@@ -23,6 +23,8 @@
       <class>org.peakcoin.domain.Company</class>
       <class>org.peakcoin.domain.Hiking</class>
       <class>org.peakcoin.domain.HikingPerson</class>
+      <class>org.peakcoin.domain.Feedback</class>
+      <class>org.peakcoin.domain.FeedbackDetail</class>
       <!-- entities -->
       
       <exclude-unlisted-classes>true</exclude-unlisted-classes>
